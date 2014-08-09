@@ -1,5 +1,5 @@
 useful: 
-1. TO track the name and version of installed python package we're using so that we can seamlessly recreate our environment in our porouction area:  
+1. TO track the name and version of installed python package we're using so that we can seamlessly recreate our environment in our production area:  
       pip freeze > requirement.tt
 
 
