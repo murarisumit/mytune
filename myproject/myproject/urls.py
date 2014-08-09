@@ -4,6 +4,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+	url(r'^fbsong/$','fbsong.views.index'),
     # Examples:
     # url(r'^$', 'myproject.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),

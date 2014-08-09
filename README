@@ -1,0 +1,1 @@
+This is simple django project, which fetches feeds(songs) a facebook page and then then plays it on saperate page using YOUTUBE api's

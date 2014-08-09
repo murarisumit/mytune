@@ -1,0 +1,41 @@
+import facebook
+import json
+
+def get_feed_from_page2():
+	"""This'll fetch the feeds from the pages"""
+	graph=facebook.GraphAPI("CAACEdEose0cBANZCwulZAQWKtCgClmGpOLtYD5c6Fzdb3w7EHrd3eIBm9v8s8UktZC3Lrg44fSavbj4jGzLdyNFitoIWC5kC41JdA8WoFlZC5vqoKfyW7fD6v4RhcxVVOJdE5ZCMEGUhpSPulUwFoBBHAVlZCWDq1zc37qUPPqJ9ydZCAJNcCNUuK2Ql3f8Cce6VZCfiPffFOZAvOZCvhbSUZBSy3ZCVspFNZBRUZD")
+	groupFeed = graph.get_connections('221723967989344','feed')  #(pageId,feed)
+	feedData=groupFeed['data']
+	#it'll save the feed list. It'll be list of hash's
+	feed_list=[]
+	for x in range(len(feedData)):
+		print "\nFor feed ",x
+		print feedData[x]
+		feed_id=feedData[x]["id"]
+		print "Feed id is: ",feed_id
+		#we nneed source of the song ...  
+		if feedData[x].has_key('source'):
+			print "Source is: "
+			print feedData[x]['source']
+			if feedData[x]['source'].find('http://www.youtube.com/v/') != -1:
+				video_id=feedData[x]['source'].split('/v/')[1][:11]
+			d={"from" : video_id,"username": feedData[x]["from"]["name"],"name" : feedData[x]["name"],"description":feedData[x]["description"]}
+			
+			if feedData[x].has_key('likes'):
+				d["likes"]=len(feedData[x]['likes']['data'])
+			else:
+				print "no like field found !"   # No like field found,hence 0 likes on the feed
+				d["likes"]=0 
+			feed_list.append(d)
+    #Encode them in json_data
+	json_string=json.dumps(feed_list,indent=4)
+	print "Function work done...returning \n"
+	return json_string
+	
+def check():
+	return "sumitMurari"
+
+json_data=get_feed_from_page2()
+print json_data
+
+

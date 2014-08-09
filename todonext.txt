@@ -1,0 +1,14 @@
+useful: 
+1. TO track the name and version of installed python package we're using so that we can seamlessly recreate our environment in our porouction area:  
+      pip freeze > requirement.tt
+
+
+===================================================
+
+for the next time: default environent is set.
+
+Now for pushing to github: "git push toGithub master"
+
+and to start virtual environment: "source ./env/bin/activate"
+
+and  rest is to be done.

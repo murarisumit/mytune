@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>MyTunes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="inspiritas.css" rel="stylesheet">    
+  
+  	<script>
+      /*function populate()
+      {
+        data=JSON.parse({{data}});
+        //alert(data);
+        all_ids=data['all_ids'];
+        //alert(all_ids);
+        console.log(all_ids);
+        console.log("doneneeeeee");
+        playlist=data['feed_list'];
+         for (var i=0; i<playlist.length; i++)
+         {     
+            var item=playlist[i];
+            console.log(item['from']);
+            console.log(item['name']);
+            var html = '<li><a href="' +i+ '" class="videolink"> <i class="icon-play"></i> ' + item['name'] + '</a></li>';
+            $('#videoslist').append(html);
+         }
+         //after all the work is done, add the songs to player.
+         player.loadPlaylist(all_ids);  
+        
+         $('.videolink').on('click', function(e) {
+     e.preventDefault();
+         var ind = parseInt($(this).attr('href'));
+         console.log(ind);
+         player.playVideoAt(ind);
+       });
+      }*/
+    </script>
+</head>
+<body>
+
+<!-- Navbar
+  ================================================== -->
+<div class="navbar navbar-static-top navbar-inverse">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+
+      <a class="brand" href="#">MyTunes</a>
+      <span class="tagline">a youtube videos player. <a href="#">Read more.</a></span>
+
+      <div class="nav-collapse collapse" id="main-menu">
+        <div class="auth pull-right">
+            <!--img class="avatar" src="images/littke.png"-->
+            <span class="name">Prince Mishra</span><br/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+    <div class="row-fluid">
+        <div class="span3">
+            <aside>
+                <nav>
+                    <ul class="nav" id="videoslist">
+                    </ul>
+                </nav>
+            </aside>
+        </div>
+        <div class="span9" id="content-wrapper">
+            <div id="content">
+
+                <!-- Navbar
+                ================================================== -->
+                <section id="stats">
+                  <header>
+                    <!--div class="pull-right">
+                        <a class="btn btn-small">Edit</a>
+                        <a class="btn btn-small">Shoot me</a>
+                    </div-->
+                    <h1 id="song-name">Dashboard</h1>
+                  </header>
+                </section>
+                <!-- Graph
+                ================================================== -->
+                <section id="forms">
+                  <div class="sub-header">
+                    <h2>Embedded Video</h2>
+                  </div>
+                  <div class="row-fluid row-fluid-alternate-bg">
+                    <div class="span12">
+                        <div id="ytplayer"></div>
+                    </div>
+                  </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div><!-- /container -->
+
+
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/highcharts.js"></script>
+    <script src="js/inspiritas.js"></script>
+    <script src="bootstrap/js/bootstrap-dropdown.js"></script>
+    <script src="bootstrap/js/bootstrap-collapse.js"></script>
+
+    
+    <script>
+      // Load the IFrame Player API code asynchronously.
+      var tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/player_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // Replace the 'ytplayer' element with an <iframe> and
+      // YouTube player after the API code downloads.
+      function onPlayerReady(event) {
+        console.log("ready");
+      }
+      function onPlayerStateChange(event) {
+        console.log("changed ", event.data);
+        var state = event.data,
+        ind;
+        if (state == 1) {
+          //started playing
+          ind = player.getPlaylistIndex();
+          console.log("index ", ind);
+          $('.videolink').closest('li').removeClass('selected');
+          $($('.videolink')[ind]).closest('li').addClass('selected');
+          var name = playlistnames[ind];
+          $('#song-name').html(name);
+
+        }
+
+      }
+      var player;
+      function onYouTubePlayerAPIReady() {
+        player = new YT.Player('ytplayer', {
+          height: '500',
+          width: '860',
+          playerVars : {'autoplay' : 0, 'loop' : 1},
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+		//player.addEventListener("onStateChange", "onytplayerStateChange");
+		
+      }
+    </script>
+    
+    
+  </body>
+</html>
