@@ -8,7 +8,7 @@ def checkk():
 
 def get_feed_from_page2():
 	"""This'll fetch the feeds from the pages"""
-	graph=facebook.GraphAPI("CAACEdEose0cBAA1RZAKGdSZBiTxxUw4yBWvdqxko2Ag2VdYXS9FbOzCPZBSkMsYn5UKpJ84q1VcyKh9Wr2SZCgmapVzbzHe33V7Q1qT1SCQjVM0kvCcgDunOQlbXWHZAdh9sPoDSpfLkvFStLepIBptxQRjBv6IWZBt3cII9uBmVEmOqF1bzREGlC7veHGbXtqw3zQsQ1mDCelrrdoNMYaZArUdCkuYnfEZD")
+	graph=facebook.GraphAPI("Use your oauth token here")
 	groupFeed = graph.get_connections('221723967989344','feed')  #(pageId,feed)
 	feedData=groupFeed['data']
   
